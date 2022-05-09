@@ -7,7 +7,7 @@ import ForecastInfo from "./components/ForecastInfo";
 export default function App() {
     const [cityName, setCityName] = useState("");
     const [cityWeather, setCityWeather] = useState(undefined);
-    const [shouldShowForecastCard, setShouldShowForecastCard] = useState(false);
+    const [shouldShowForecastInfo, setShouldShowForecastInfo] = useState(false);
 
     const getCityLatAndLon = function () {
         const apiUri = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&lang=${API_LANG}&appid=${API_KEY}`;
@@ -36,14 +36,14 @@ export default function App() {
                     }
 
                     setCityWeather(currentWeather);
-                    setShouldShowForecastCard(true);
+                    setShouldShowForecastInfo(true);
                 })
                 .catch((error) => {
-                    setShouldShowForecastCard(false);
+                    setShouldShowForecastInfo(false);
                     console.error(error);
                 });
         } catch (error) {
-            setShouldShowForecastCard(false);
+            setShouldShowForecastInfo(false);
             console.log(error);
         }
     }
@@ -59,7 +59,7 @@ export default function App() {
                 />
                 <Button title="Buscar" onPress={setCurrentCityWeatherInfo}/>
             </View>
-            {shouldShowForecastCard ? <ForecastInfo cityWeather={cityWeather}/> : null}
+            {shouldShowForecastInfo ? <ForecastInfo cityWeather={cityWeather}/> : null}
         </View>
     );
 }
